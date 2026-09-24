@@ -1,0 +1,995 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WADA Presentation Guide</title><style>
+:root{--teal:#318e90;--dark:#35585a;--gold:#c7a24b;--text:#3e5556;--muted:#718586;--line:#dce7e5;--soft:#f5f9f8}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--text);background:#fff}
+header{height:120px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 7vw}
+.brand{display:flex;align-items:center;gap:15px}.brand img{width:190px;height:190px;object-fit:contain}.brand strong{display:block;font-size:14px}.brand span{font-size:12px;color:var(--muted)}
+nav{display:flex;gap:28px;font-size:13px}.hero{text-align:center;padding:44px 20px 30px;background:linear-gradient(#f6fbfa,#fff)}
+.hero h1{font-family:Georgia,serif;font-size:38px;margin:0 0 11px;color:var(--dark)}.hero p{margin:5px;color:var(--muted)}
+main{max-width:1050px;margin:auto;padding:18px 24px 60px}.title{text-align:center;font-family:Georgia,serif;font-size:23px;color:var(--dark);margin:15px 0 20px}
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.type{border:1px solid var(--line);border-radius:12px;padding:22px;text-align:center;cursor:pointer;background:#fff}
+.type.active{border:2px solid var(--teal);background:#f1f9f8}.type .ico{font-size:28px}.type b{display:block;margin:8px;color:var(--dark)}.type small{color:var(--muted)}
+.form{border-top:1px solid var(--line);margin-top:28px;padding-top:25px}.grid{display:grid;grid-template-columns:1fr 220px;gap:16px}label{font-size:13px;font-weight:bold;display:block;margin-bottom:7px}
+input,select,textarea{width:100%;border:1px solid #cbdad8;border-radius:8px;padding:13px;font:inherit;color:var(--text)}textarea{min-height:145px;resize:vertical}.full{grid-column:1/-1}.hint{font-size:12px;color:var(--muted);margin-top:6px}
+.generate{display:block;margin:22px auto 0;border:0;border-radius:8px;padding:13px 24px;background:var(--teal);color:white;font-weight:bold;cursor:pointer}
+.output{display:none;margin-top:30px;border:1px solid var(--line);border-radius:12px;overflow:hidden}.outhead{background:var(--soft);padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.copy{border:1px solid #bad0cd;background:white;border-radius:7px;padding:8px 12px;cursor:pointer}.prompt{white-space:pre-wrap;padding:20px;max-height:500px;overflow:auto;font:13px/1.55 monospace}
+.notice{display:none;margin:20px auto;padding:15px;max-width:680px;text-align:center;background:#fff8e9;border:1px solid #ead39a;border-radius:9px}
+.rules{margin-top:38px;background:var(--soft);border-radius:14px;padding:22px}.rules h3{text-align:center;font-family:Georgia,serif;margin-top:0}.rulegrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;text-align:center;font-size:12px}.rulegrid b{display:block;margin:6px}
+footer{text-align:center;border-top:1px solid var(--line);padding:25px;color:var(--muted);font-size:12px}footer strong{display:block;color:var(--dark);font-size:13px;margin-bottom:5px}
+@media(max-width:760px){nav{display:none}header{padding:0 18px}.hero h1{font-size:31px}.types,.grid{grid-template-columns:1fr}.full{grid-column:auto}.rulegrid{grid-template-columns:1fr 1fr}}
+</style></head>
+<body><header><div class="brand"><img src="data:image/png;base64,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" alt="Security Forces Hospital, Riyadh"><div><strong>Family Medicine Residency Training Program</strong><span>Security Forces Hospital, Riyadh</span></div></div></header>
+<section class="hero"><h1>WADA Presentation Guide</h1><p>AI-Assisted Presentation Guide</p></section>
+<main><div class="title">Choose Your Presentation Type</div><div class="types">
+<div class="type active" data-kind="case"><div class="ico">🩺</div><b>Case-Based Lecture</b><small>Multiple evolving cases &amp; clinical decisions</small></div>
+<div class="type" data-kind="interactive"><div class="ico">💬</div><b>Interactive Lecture</b><small>Questions, polls &amp; audience participation</small></div>
+<div class="type" data-kind="spot"><div class="ico">🔎</div><b>Spot Diagnosis</b><small>Visual clues &amp; rapid diagnostic reasoning</small></div></div>
+<div class="notice" id="notice">This pathway will be added next. Case-Based Lecture is currently ready to use.</div>
+<section class="form" id="form"><div class="grid">
+<div><label>Lecture Topic</label><input id="topic" placeholder="e.g., Hypertension"></div>
+<div><label>Presenter Name</label><input id="presenter" placeholder="e.g., Dr. Yousef"></div>
+<div class="full"><label id="objectivesLabel">Learning Objectives</label><textarea id="objectives" placeholder="Paste the approved learning objectives here..."></textarea><div class="hint" id="objectivesHint" style="display:none"></div></div>
+<div class="full"><label>Preferred Sources / Guidelines <span style="font-weight:normal;color:var(--muted)">(optional)</span></label><textarea id="sources" placeholder="e.g., 2025 AHA/ACC Hypertension Guideline&#10;Saudi Hypertension Guideline"></textarea><div class="hint">Enter the guidelines or trusted sources that should form the primary evidence base for the lecture.</div></div>
+<div class="full"><label>Evidence Source Priority</label><select id="sourcePriority"><option value="Use my sources primarily" selected>Use my sources primarily</option><option value="Use only my sources">Use only my sources</option></select><div class="hint">Choose whether AI may supplement your sources with other authoritative evidence.</div></div>
+</div>
+<button class="generate" id="generate">Generate Slide Content Prompt</button></section>
+<section class="output" id="output"><div class="outhead"><strong>Your Presentation Prompt</strong><button class="copy" id="copy">Copy Prompt</button></div><div class="prompt" id="prompt"></div></section>
+</main>
+<footer><strong>Prepared by Dr. Yousef Almusalam</strong>Program Director, Family Medicine Residency Training Program<br>Security Forces Hospital, Riyadh</footer>
+<script>
+const CASE_MASTER="Act as an expert Family Medicine educator and case-based learning designer.\n\nPrepare the COMPLETE SLIDE CONTENT DRAFT for a Family Medicine residency teaching session.\n\nTOPIC:\n{{TOPIC}}\n\nPRESENTER NAME:\n{{PRESENTER}}\n\nPREFERRED SOURCES / GUIDELINES:\n{{SOURCES}}\n\nEVIDENCE SOURCE PRIORITY:\n{{SOURCE_PRIORITY}}\n\n\nAUDIENCE:\nMixed-level Family Medicine residents (R1, R2, and R3) attending together.\n\nPREDEFINED LEARNING OBJECTIVES:\n{{OBJECTIVES}}\n\nThe learning objectives are already approved. Do not rewrite, replace, add, merge, or generate new objectives. Address every objective.\n\nPREFERRED EVIDENCE SOURCES\n\nIf preferred sources or guidelines are provided, use them as the primary evidence base for the lecture.\n- Base clinical recommendations, diagnostic criteria, treatment thresholds, medication choices, algorithms, and key teaching points primarily on those sources.\n- Preserve the terminology and recommendations of the specified sources accurately.\n- Do not attribute a recommendation to a source unless that source actually supports it.\n- If Evidence Source Priority is \"Use my sources primarily\", supplement only when an important learning objective is not adequately addressed, using current authoritative guidelines or high-quality evidence and clearly identifying the additional source.\n- If Evidence Source Priority is \"Use only my sources\", do not add outside clinical sources. If the supplied sources do not support an important point, mark it [NOT COVERED BY PROVIDED SOURCES].\n- If credible provided sources conflict, do not silently merge their recommendations. Briefly identify the difference.\n- Never fabricate references, recommendations, thresholds, statistics, or drug doses.\n\nIf no preferred source is entered, use the most current authoritative professional guidelines, relevant Saudi/national guidance when available, and high-quality evidence summaries.\n\nAt this stage, DO NOT design or generate a PowerPoint. Produce only the complete slide-by-slide content draft for review and approval.\n\nBuild the lecture primarily around MULTIPLE realistic Family Medicine clinical cases. Cases are the backbone, but use focused teaching slides, tables, algorithms, guideline recommendations, and summaries when they improve learning.\n\nDo not force one patient for the entire lecture, one case per objective, one question per case, or the same structure for every case. Choose the structure according to the objectives, clinical logic, topic complexity, and available time.\n\nWhen appropriate, organize the lecture into meaningful clinical sections based on the topic and objectives. A section may contain one or several cases, multiple questions within one case, teaching slides, tables, algorithms, and guideline summaries.\n\nUse realistic primary-care patients. Keep initial case information concise and reveal new information progressively. A case may evolve through multiple decisions:\nPatient presentation -> Question -> Answer/discussion -> New information/results -> Next question -> Answer/discussion -> Follow-up -> Further decision -> Teaching slide -> Case outcome.\n\nContinue the same patient when progression creates useful reasoning. Introduce a new patient when a different scenario teaches the next concept better.\n\nA case may contain MULTIPLE sequential questions. Focus on real Family Medicine decisions such as diagnosis, differential diagnosis, history/examination, investigations, interpretation, risk assessment, treatment indication, treatment choice and rationale, starting dose, titration, adding therapy, monitoring, adverse effects, counseling, follow-up, treatment failure, safety-netting, and referral. Questions should stimulate clinical reasoning, not simple recall.\n\nPROGRESSIVE REVEAL:\nThe audience must answer before seeing the correct answer. If question and answer are short, keep them on the SAME slide:\nQUESTION: [question]\n[REVEAL ON CLICK]\nANSWER: [answer]\n\nIf the answer requires substantial explanation, a table, algorithm, guideline recommendation, or multiple teaching points, use a separate Answer or Teaching Slide. Choose the clearest approach.\n\nAfter important decisions or cases, insert focused educational slides only when they add value. These may include medication tables, diagnostic criteria, treatment/investigation algorithms, management pathways, differential diagnosis tables, risk tools, monitoring, follow-up, referral criteria, guideline recommendations, and Clinical Pearls.\n\nWhen medications are important, create practical medication tables including drug class, common agents, starting dose, usual dose range, frequency, important adverse effects, contraindications, monitoring, and practical prescribing considerations.\n\nBase recommendations on current authoritative evidence. Prioritize current major professional guidelines, relevant Saudi/national guidelines when available, and high-quality systematic reviews/evidence summaries. Do not fabricate references, recommendations, statistics, drug doses, or guideline statements. Mark uncertain items [VERIFY BEFORE PRESENTATION].\n\nDesign for mixed R1-R3 residents. Use progressive difficulty: begin with essential decisions, then introduce more challenging reasoning such as treatment failure, adverse effects, diagnostic uncertainty, comorbidities, resistant disease, complex treatment selection, and referral.\n\nWrite the ACTUAL content intended for every slide. Do not merely describe what a slide should contain. If a table is needed, create the actual table. If diagnostic criteria are needed, write the actual criteria.\n\nTITLE AND LEARNING OBJECTIVES SLIDES\n\nSLIDE 1 must be a simple title slide containing ONLY:\n- Lecture title\n- Presenter name\n\nDo not add a subtitle, learning objectives, session description, audience level, agenda, institution details, or other educational content to Slide 1.\n\nSLIDE 2 must be a concise Learning Objectives slide.\n- Use ONLY the predefined learning objectives entered by the user.\n- Shorten each objective into a concise, presentation-friendly phrase while preserving its original educational intent.\n- Do not introduce, merge, omit, or add objectives.\n- Do not reproduce long detailed objective sentences on the visible slide.\n- The complete original predefined objectives must still guide the development and coverage of the entire lecture.\n\nSLIDE PACING AND CONTENT GRANULARITY\n\nDesign the session for a realistic teaching duration of 45-60 minutes.\nAs a general educational target, aim for approximately 45-60 slides when the topic supports this depth. This is a flexible target, not a mandatory quota.\nDo NOT optimize for the smallest possible number of slides. Prefer focused slides with smaller teaching units rather than compressing several important clinical decisions into one highly efficient slide.\n\nWhenever practical, use ONE MAJOR TEACHING TASK PER SLIDE. A slide may primarily:\n- Present a clinical scenario\n- Ask a clinical question\n- Reveal and explain an answer\n- Present a guideline recommendation\n- Teach a practical framework\n- Compare treatment options\n- Show a medication table\n- Introduce new case information\n- Ask the next management question\n- Explain treatment intensification\n- Highlight a common mistake\n- Summarize case pearls\n\nA major case should usually evolve across several slides when educationally appropriate:\nCase Presentation -> Clinical Question -> Answer/Reasoning -> Focused Teaching Slide -> Case Progression -> Next Question -> Answer/Discussion -> Practical Summary.\n\nUse additional short application slides when they genuinely reinforce the predefined objectives, such as mini clinical scenarios, \"What would you do next?\" questions, drug-selection scenarios, interpretation exercises, follow-up decisions, common mistakes, and Clinical Pearls.\n\nDo not artificially inflate the slide count with filler, repetition, or unnecessary splitting. However, do not compress meaningful clinical reasoning merely to keep the deck short.\nDo not place an entire major management pathway on one slide when its individual decisions deserve separate teaching or discussion.\nThe final presentation should contain enough educational progression and interaction that a resident with moderate presentation skills can realistically deliver it over 45-60 minutes without artificially extending discussion.\n\nRESIDENT-FRIENDLY SLIDE CONTENT\n\nDesign the lecture for residents who may have LIMITED PRESENTATION EXPERIENCE.\n\nDo NOT assume that the presenter can expand a few keywords into a complete explanation from memory.\n\nEach teaching slide must contain enough visible educational content to communicate the core clinical message even when the resident provides only moderate additional explanation.\n\nAvoid BOTH extremes:\n- Do not create overcrowded, textbook-like slides with long paragraphs.\n- Do not create overly minimal slides containing only a few keywords, numbers, or isolated phrases.\n\nInstead:\n- Use complete but concise explanatory statements.\n- Use structured bullet points with enough context to be understood.\n- Use practical tables, algorithms, examples, comparison boxes, and Clinical Pearls when useful.\n- Include important definitions, thresholds, recommendations, and practical clinical actions directly on the visible slide when they are central to the teaching point.\n- Clinical case slides should contain enough narrative information for the resident to present the patient naturally, rather than only isolated data points.\n- Question slides should provide sufficient clinical context before asking for a decision.\n- Answer/teaching slides should visibly explain WHY the answer is correct, not merely display the correct option.\n- Do not hide essential teaching information only in Presenter Notes.\n\nSELF-SUFFICIENT TEACHING SLIDES\n\nA resident reviewing the presentation later without hearing the lecture should still be able to understand the main clinical message of each teaching slide.\n\nPresenter Notes should SUPPORT, EXPAND, and GUIDE the presenter; they should not be the only place where essential educational content exists.\n\nPRESENTER NOTES\n\nKeep Presenter Notes focused and practical. Do not create extensive presenter scripts or repetitive delivery instructions.\n\nPresenter Notes should briefly provide, when relevant:\n- Important explanation or clinical reasoning not suitable for the visible slide\n- Rationale behind the correct answer\n- Why alternative answers are incorrect when educationally useful\n- Important guideline nuances, exceptions, or common misconceptions\n- One useful discussion prompt when it genuinely improves the case\n- Supporting evidence or references\n\nDo NOT routinely include separate sections for Suggested Time, How to Present, Ask the Audience, Key Point to Emphasize, or Suggested Transition.\n\nThe visible slide itself should contain enough educational information to support a resident with limited presentation experience.\n\nSLIDE STRUCTURE CLARITY\n\nOutput only actual numbered slides. Do not create separate CASE headings, SECTION headings, or other standalone headings that could be mistaken for additional slides.\n\nEach actual slide must have only ONE primary title, using exactly this format:\nSLIDE [NUMBER] - [TITLE]\n\nIf a case number, case stage, or section name is useful, place it as a small label WITHIN the VISIBLE SLIDE CONTENT, for example:\nCase 3 - Follow-up Visit\nor\nSection: Treatment Intensification\n\nDo not place CASE 1, CASE 2, SECTION 1, or similar headings outside the numbered slide structure.\n\nOne SLIDE heading must always equal one future PowerPoint slide. The final draft must make it completely unambiguous what constitutes a slide.\n\nFor EVERY slide use:\n\nSLIDE [NUMBER] - [TITLE]\n\nVISIBLE SLIDE CONTENT:\n[Actual resident-friendly slide content. Provide enough information to teach the concept clearly without overcrowding the slide.]\n\nPRESENTER NOTES:\n[Brief additional explanation, clinical reasoning, answer rationale, misconceptions, guideline nuances, or a discussion prompt when useful. Keep this focused rather than scripting the presenter.]\n\nSOURCE / REFERENCE:\n[Relevant source when applicable]\n\nAt this draft stage, recommend educational visuals only when useful using labels such as [SUGGESTED TABLE], [SUGGESTED ALGORITHM], [SUGGESTED FLOWCHART], [SUGGESTED ECG], [SUGGESTED RADIOLOGY IMAGE], [SUGGESTED DERMATOLOGY IMAGE], or [SUGGESTED ANATOMICAL DIAGRAM].\n\nDo not generate decorative images. Do not use or recommend photographs or AI-generated images of patients or people.\n\nThe lecture must realistically support 45-60 minutes of teaching. Manage pacing internally and do not assign a Suggested Time to every slide. Prioritize meaningful case progression, clinical reasoning, interaction, and the predefined objectives over exhaustive coverage.\n\nWhen useful, finish major cases with 2-4 concise CASE PEARLS. Finish the lecture with approximately 5 actionable TAKE-HOME MESSAGES and REFERENCES containing only sources actually used.\n\nBefore writing the final draft, silently verify that all predefined objectives are covered without rewriting; cases and sequential questions progress naturally; questions are clinically meaningful; answers remain hidden until discussion; teaching slides add genuine value; medication tables are practical; content suits Family Medicine and mixed R1-R3 residents; visible slides are resident-friendly, sufficiently informative without becoming overcrowded; Presenter Notes are brief, focused, and educational rather than scripted; evidence is current and referenced; and the session realistically supports 45-60 minutes of teaching without filler or unnecessary repetition.\n\nFINAL INSTRUCTION:\nDO NOT create or design the PowerPoint yet.\nProduce ONLY the complete slide-by-slide CONTENT DRAFT for review and approval.\nPresentation design will be performed separately after approval.";;
+const INTERACTIVE_MASTER=`Act as an expert Family Medicine educator and interactive learning designer.
+
+Prepare the COMPLETE SLIDE CONTENT DRAFT for an INTERACTIVE Family Medicine residency teaching session.
+
+TOPIC:
+{{TOPIC}}
+
+PRESENTER NAME:
+{{PRESENTER}}
+
+PREFERRED SOURCES / GUIDELINES:
+{{SOURCES}}
+
+EVIDENCE SOURCE PRIORITY:
+{{SOURCE_PRIORITY}}
+
+AUDIENCE:
+Mixed-level Family Medicine residents (R1, R2, and R3) attending together.
+
+PREDEFINED LEARNING OBJECTIVES:
+{{OBJECTIVES}}
+
+The learning objectives are already approved. Do not rewrite, replace, add, merge, or generate new objectives. Address every objective.
+
+PREFERRED EVIDENCE SOURCES
+
+If preferred sources or guidelines are provided, use them as the primary evidence base for the lecture.
+- Base clinical recommendations, diagnostic criteria, treatment thresholds, medication choices, algorithms, and key teaching points primarily on those sources.
+- Preserve the terminology and recommendations of the specified sources accurately.
+- Do not attribute a recommendation to a source unless that source actually supports it.
+- If Evidence Source Priority is "Use my sources primarily", supplement only when an important learning objective is not adequately addressed, using current authoritative guidelines or high-quality evidence and clearly identifying the additional source.
+- If Evidence Source Priority is "Use only my sources", do not add outside clinical sources. If the supplied sources do not support an important point, mark it [NOT COVERED BY PROVIDED SOURCES].
+- If credible provided sources conflict, do not silently merge their recommendations. Briefly identify the difference.
+- Never fabricate references, recommendations, thresholds, statistics, or drug doses.
+
+If no preferred source is entered, use the most current authoritative professional guidelines, relevant Saudi/national guidance when available, and high-quality evidence summaries.
+
+At this stage, DO NOT design or generate a PowerPoint. Produce only the complete slide-by-slide content draft for review and approval.
+
+INTERACTIVE LECTURE PHILOSOPHY
+
+The TOPIC itself is the backbone of the lecture. Build a coherent educational sequence around the predefined objectives, but make the residents active participants throughout the session.
+
+Use this recurring educational rhythm when appropriate:
+TEACH -> ASK / CHALLENGE -> DISCUSS -> REVEAL -> EXPLAIN -> APPLY -> CONTINUE.
+
+Do not turn the lecture into a continuous quiz. Teaching slides, tables, algorithms, guideline recommendations, comparisons, practical frameworks, and summaries should remain an important part of the session. Interaction should reinforce meaningful clinical decisions and concepts rather than interrupting the flow artificially.
+
+INTERACTION FREQUENCY AND VARIETY
+
+Create meaningful audience interaction approximately every 5-8 minutes when educationally appropriate. Do not force an interaction after every slide, and do not allow long stretches of passive teaching when a useful interaction could improve learning.
+
+Vary the interaction format according to the content. Appropriate formats include:
+- Single Best Answer / MCQ
+- True or False
+- What would you do next?
+- Choose all that apply
+- Rank the options by priority
+- Spot the error in a prescription, investigation plan, management plan, or clinical statement
+- Interpret this: laboratory results, ECG, imaging, BP readings, risk results, clinical data, or other topic-relevant information
+- Short clinical scenario followed by a decision
+- Open discussion question
+- Myth or Fact
+- Before vs After: initial decision followed by guideline/evidence-based reconsideration
+
+Do not use every format merely for variety. Select the interaction that best teaches the concept. Avoid repeating the same interaction pattern excessively.
+
+INTERACTION QUALITY
+
+Prioritize clinical reasoning and application over simple factual recall. Questions should focus on decisions that matter in Family Medicine, such as diagnosis, differential diagnosis, investigation selection, interpretation, risk assessment, treatment indication, medication selection, dose/titration, monitoring, adverse effects, counseling, follow-up, treatment failure, safety-netting, and referral.
+
+Short clinical scenarios may be used frequently, but this is NOT a Case-Based Lecture. Do not build the entire lecture around one evolving patient or a sequence of long cases. Use concise scenarios only when they improve application of the teaching point.
+
+PROGRESSIVE REVEAL
+
+The audience must answer or discuss before seeing the correct answer, explanation, or guideline conclusion.
+
+If the question and answer are short, keep them on the SAME slide:
+QUESTION: [question]
+[REVEAL ON CLICK]
+ANSWER: [answer + concise rationale]
+
+If the answer requires substantial explanation, a table, algorithm, guideline recommendation, or multiple teaching points, use a separate Answer / Explanation / Teaching slide. Choose the clearest educational approach.
+
+Never reveal, visually emphasize, or hint at the correct answer before discussion.
+
+After an interaction, explain WHY the answer is correct and, when educationally useful, why plausible alternatives are incorrect. Then connect the interaction back to the relevant clinical principle or guideline recommendation.
+
+TEACHING AND APPLICATION
+
+Use focused educational slides when they add value. These may include diagnostic criteria, medication tables, investigation or treatment algorithms, management pathways, differential diagnosis tables, risk tools, monitoring, follow-up, referral criteria, guideline recommendations, practical frameworks, common pitfalls, and Clinical Pearls.
+
+When medications are important, create practical medication tables including drug class, common agents, starting dose, usual dose range, frequency, important adverse effects, contraindications, monitoring, and practical prescribing considerations.
+
+Use additional short application exercises when they genuinely reinforce the predefined objectives. Examples include choosing between two management plans, identifying the next best step, interpreting a result, correcting an error, prioritizing actions, or applying a guideline recommendation to a brief scenario.
+
+Design for mixed R1-R3 residents. Use progressive difficulty: begin with essential concepts and decisions, then introduce more challenging reasoning such as diagnostic uncertainty, comorbidities, treatment failure, adverse effects, complex treatment selection, resistant disease, exceptions, and referral.
+
+TITLE AND LEARNING OBJECTIVES SLIDES
+
+SLIDE 1 must be a simple title slide containing ONLY:
+- Lecture title
+- Presenter name
+
+Do not add a subtitle, learning objectives, session description, audience level, agenda, institution details, or other educational content to Slide 1.
+
+SLIDE 2 must be a concise Learning Objectives slide.
+- Use ONLY the predefined learning objectives entered by the user.
+- Shorten each objective into a concise, presentation-friendly phrase while preserving its original educational intent.
+- Do not introduce, merge, omit, or add objectives.
+- Do not reproduce long detailed objective sentences on the visible slide.
+- The complete original predefined objectives must still guide the development and coverage of the entire lecture.
+
+SLIDE PACING AND CONTENT GRANULARITY
+
+Design the session for a realistic teaching duration of 45-60 minutes.
+As a general educational target, aim for approximately 45-60 slides when the topic supports this depth. This is a flexible target, not a mandatory quota.
+Do NOT optimize for the smallest possible number of slides. Prefer focused slides with smaller teaching units rather than compressing several important concepts or decisions into one overcrowded slide.
+
+Whenever practical, use ONE MAJOR TEACHING TASK PER SLIDE. A slide may primarily:
+- Teach one focused concept
+- Present a guideline recommendation
+- Present a practical framework
+- Compare options
+- Show a medication table
+- Ask an interactive question
+- Reveal and explain an answer
+- Present a short clinical scenario
+- Ask for interpretation of clinical data
+- Highlight a common mistake
+- Apply a concept to practice
+- Summarize key pearls
+
+Do not artificially inflate the slide count with filler, repetition, or unnecessary splitting. However, do not compress meaningful reasoning merely to keep the deck short.
+The final presentation should contain enough educational progression and interaction that a resident with moderate presentation skills can realistically deliver it over 45-60 minutes without artificially extending discussion.
+
+RESIDENT-FRIENDLY SLIDE CONTENT
+
+Design the lecture for residents who may have LIMITED PRESENTATION EXPERIENCE.
+Do NOT assume that the presenter can expand a few keywords into a complete explanation from memory.
+
+Each teaching slide must contain enough visible educational content to communicate the core clinical message even when the resident provides only moderate additional explanation.
+
+Avoid BOTH extremes:
+- Do not create overcrowded, textbook-like slides with long paragraphs.
+- Do not create overly minimal slides containing only a few keywords, numbers, or isolated phrases.
+
+Instead:
+- Use complete but concise explanatory statements.
+- Use structured bullet points with enough context to be understood.
+- Use practical tables, algorithms, examples, comparison boxes, and Clinical Pearls when useful.
+- Include important definitions, thresholds, recommendations, and practical clinical actions directly on the visible slide when they are central to the teaching point.
+- Interactive question slides must provide sufficient context for residents to make a meaningful decision.
+- Answer/explanation slides must visibly explain WHY the answer is correct, not merely display the correct option.
+- Do not hide essential teaching information only in Presenter Notes.
+
+SELF-SUFFICIENT TEACHING SLIDES
+
+A resident reviewing the presentation later without hearing the lecture should still be able to understand the main clinical message of each teaching slide.
+Presenter Notes should SUPPORT, EXPAND, and GUIDE the presenter; they should not be the only place where essential educational content exists.
+
+PRESENTER NOTES
+
+Keep Presenter Notes focused and practical. Do not create extensive presenter scripts or repetitive delivery instructions.
+
+Presenter Notes should briefly provide, when relevant:
+- Important explanation or clinical reasoning not suitable for the visible slide
+- Rationale behind the correct answer
+- Why alternative answers are incorrect when educationally useful
+- Important guideline nuances, exceptions, or common misconceptions
+- One useful discussion prompt when it genuinely improves interaction
+- Supporting evidence or references
+
+Do NOT routinely include separate sections for Suggested Time, How to Present, Ask the Audience, Key Point to Emphasize, or Suggested Transition.
+
+SLIDE STRUCTURE CLARITY
+
+Output only actual numbered slides. Do not create separate SECTION headings or other standalone headings that could be mistaken for additional slides.
+
+Each actual slide must have only ONE primary title, using exactly this format:
+SLIDE [NUMBER] - [TITLE]
+
+One SLIDE heading must always equal one future PowerPoint slide. The final draft must make it completely unambiguous what constitutes a slide.
+
+For EVERY slide use:
+
+SLIDE [NUMBER] - [TITLE]
+
+VISIBLE SLIDE CONTENT:
+[Actual resident-friendly slide content. Provide enough information to teach the concept clearly without overcrowding the slide.]
+
+PRESENTER NOTES:
+[Brief additional explanation, clinical reasoning, answer rationale, misconceptions, guideline nuances, or a discussion prompt when useful. Keep this focused rather than scripting the presenter.]
+
+SOURCE / REFERENCE:
+[Relevant source when applicable]
+
+At this draft stage, recommend educational visuals only when useful using labels such as [SUGGESTED TABLE], [SUGGESTED ALGORITHM], [SUGGESTED FLOWCHART], [SUGGESTED ECG], [SUGGESTED RADIOLOGY IMAGE], [SUGGESTED DERMATOLOGY IMAGE], or [SUGGESTED ANATOMICAL DIAGRAM].
+
+Do not generate decorative images. Do not use or recommend photographs or AI-generated images of patients or people.
+
+KNOWLEDGE CHECK AND CLOSING
+
+When appropriate, near the end include a concise Knowledge Check / Challenge using approximately 3-5 rapid questions that revisit the most important clinical decisions from the lecture without simply repeating earlier questions verbatim.
+
+Finish with approximately 5 actionable TAKE-HOME MESSAGES and REFERENCES containing only sources actually used.
+
+Before writing the final draft, silently verify that all predefined objectives are covered without rewriting; the teaching sequence is coherent; interactions are varied and clinically meaningful; residents are asked to think before answers are revealed; answers remain hidden until discussion; explanations visibly teach the reasoning; interaction occurs regularly without turning the lecture into a quiz; teaching slides add genuine value; medication tables are practical; content suits Family Medicine and mixed R1-R3 residents; visible slides are resident-friendly and sufficiently informative without becoming overcrowded; Presenter Notes are brief and educational rather than scripted; evidence is current and referenced; and the session realistically supports 45-60 minutes without filler or unnecessary repetition.
+
+FINAL INSTRUCTION:
+DO NOT create or design the PowerPoint yet.
+Produce ONLY the complete slide-by-slide CONTENT DRAFT for review and approval.
+Presentation design will be performed separately after approval.`;
+
+const SPOT_MASTER=`Act as an expert Family Medicine educator, visual diagnosis educator, and spot-diagnosis learning designer.
+
+Prepare the COMPLETE SLIDE CONTENT DRAFT for a SPOT DIAGNOSIS Family Medicine residency teaching session.
+
+TOPIC:
+{{TOPIC}}
+
+PRESENTER NAME:
+{{PRESENTER}}
+
+PREFERRED SOURCES / GUIDELINES:
+{{SOURCES}}
+
+EVIDENCE SOURCE PRIORITY:
+{{SOURCE_PRIORITY}}
+
+AUDIENCE:
+Mixed-level Family Medicine residents (R1, R2, and R3) attending together.
+
+TARGET DIAGNOSES / REQUIRED SPOTS:
+{{TARGET_DIAGNOSES}}
+
+The diagnoses/conditions listed by the user are the required content for this Spot Diagnosis session.
+- Include EVERY listed diagnosis or condition as a primary diagnostic spot at least once.
+- Do not omit, replace, merge, or silently substitute any listed diagnosis.
+- Do not create additional primary spot diagnoses unless the user listed them.
+- Other conditions may appear only as relevant mimics/differentials or within a direct comparison; they should not become extra primary spots.
+- Arrange the required spots in the most educational sequence rather than simply copying the input order when a different order improves progression.
+- The target-diagnosis list is an AUTHORING instruction. Do NOT display the full list to the audience before the spots, because doing so may reveal the answers.
+
+PREFERRED EVIDENCE SOURCES
+
+If preferred sources or guidelines are provided, use them as the primary evidence base for the lecture.
+- Base diagnostic criteria, visual findings, interpretation rules, management implications, red flags, treatment recommendations, and key teaching points primarily on those sources.
+- Preserve the terminology and recommendations of the specified sources accurately.
+- Do not attribute a recommendation or visual finding to a source unless that source actually supports it.
+- If Evidence Source Priority is "Use my sources primarily", supplement only when a required diagnosis or an important recognition/management point is not adequately supported, using current authoritative guidelines, high-quality evidence, or reliable clinical image/ECG/radiology teaching sources and clearly identifying the additional source.
+- If Evidence Source Priority is "Use only my sources", do not add outside clinical sources. If the supplied sources do not support an important point or required visual finding, mark it [NOT COVERED BY PROVIDED SOURCES].
+- If credible provided sources conflict, do not silently merge their recommendations. Briefly identify the difference.
+- Never fabricate references, diagnostic features, recommendations, thresholds, statistics, drug doses, or visual findings.
+
+If no preferred source is entered, use the most current authoritative professional guidelines, relevant Saudi/national guidance when available, high-quality evidence summaries, and reliable clinical teaching sources.
+
+At this stage, DO NOT design or generate a PowerPoint. Produce only the complete slide-by-slide content draft for review and approval.
+
+SPOT DIAGNOSIS PHILOSOPHY
+
+The SPOTS themselves are the backbone of the lecture. Build a coherent educational sequence around the user-selected target diagnoses using visual or data-based diagnostic challenges that require residents to inspect, identify, commit to an answer, and then learn from the reveal.
+
+Use this recurring educational rhythm when appropriate:
+SEE -> ASK -> COMMIT -> REVEAL -> ASK MORE -> APPLY.
+
+Each spot should feel like a focused visual viva rather than a labeled teaching template. Use short, direct questions to lead residents from recognition to interpretation and action. Do not reduce the session to simply naming an image, but do not organize the visible slide under repetitive labels such as DIAGNOSIS / FINDING, KEY CLUES, DIFFERENTIATE, or CLINICAL ACTION.
+
+APPROPRIATE SPOT TYPES
+
+Use the visual or interpretation format that best fits the topic and the required diagnoses. Appropriate spot material may include:
+- Dermatology images
+- Otoscopy images
+- Fundus or ophthalmic images
+- ECGs or rhythm strips
+- Chest X-rays or other common primary-care imaging
+- Clinical photographs of localized findings when educationally appropriate
+- Anatomical or examination findings
+- Laboratory patterns or compact data panels
+- BP logs, spirometry, peak-flow data, growth charts, risk results, or other primary-care interpretation material
+- Paired images or findings for comparison
+- Other clinically relevant visual diagnostic material
+
+Do not force every type into one lecture. Select only formats that genuinely support the topic and the required diagnoses.
+
+VISUAL-FIRST SPOT CONSTRUCTION
+
+For each diagnostic spot:
+- Present the visual stimulus or data first and give only the minimum clinical context needed for a fair interpretation.
+- Avoid unnecessary history, labels, captions, or clues that reveal the diagnosis before residents commit.
+- Build the spot around as many short, direct questions as are educationally necessary. Do NOT impose a fixed minimum or maximum number of questions.
+- The first question should usually ask residents to identify the diagnosis, rhythm, radiographic abnormality, lesion, or laboratory pattern.
+- Then ask all clinically important follow-up questions that genuinely add educational value. Depending on the spot, these may include: "Which finding supports your diagnosis most?", "How is the diagnosis confirmed?", "What investigation is needed?", "What is the most important differential?", "How would you distinguish it?", "How severe is it?", "Is this an urgent finding?", "What is the treatment?", "What would you do next?", "When should this patient be referred?", or "What safety-netting is required?".
+- Do NOT force the same set of follow-up questions onto every spot. Select questions according to the diagnosis and its practical Family Medicine relevance.
+- Do not omit an important diagnostic, confirmation, severity, treatment, referral, or safety question merely to keep the number of questions low.
+- Do not force all questions and answers for a clinically rich Spot onto one slide. If the visual plus the required Q&A would make the slide crowded, reduce the diagnostic visual excessively, or require main visible text below 22 pt, divide that SAME Spot across two or more slides during Stage 1.
+- When a Spot spans multiple slides, keep the same Spot number/title on every continuation slide (for example, “Spot 4” on each slide), continue the direct question sequence naturally, and repeat only the minimum visual/context needed for orientation. Do not create a new Spot number merely because the content continues onto another slide.
+- Do not include the diagnosis, disease name, answer, or a giveaway clue in the primary slide title.
+- Give residents an opportunity to commit to each answer before it is revealed.
+
+SPOT TITLES
+
+For every diagnostic spot slide, use ONLY the spot number as the primary slide title, for example:
+SLIDE 6 - Spot 1
+SLIDE 7 - Spot 2
+SLIDE 8 - Spot 3
+
+Do not use descriptive diagnostic titles on spot slides because they may reveal or hint at the answer.
+If the same Spot requires more than one slide for its direct questions, answers, visual interpretation, or management discussion, EVERY continuation slide for that Spot must keep the SAME simple primary title, for example “Spot 4”. Do not rename continuation slides “Treatment”, “Management”, “Diagnosis”, “Part 2”, or similar.
+A separate non-spot teaching/comparison slide may use a descriptive title only when it is genuinely a standalone teaching slide rather than continuation of that Spot's Q&A.
+Teaching, comparison, summary, guideline, management, and reference slides that are not diagnostic challenge slides should retain clear descriptive titles.
+
+DIRECT QUESTION FLOW AND PROGRESSIVE REVEAL
+
+The audience must inspect and answer each question before seeing its answer.
+
+Prefer a direct question-and-answer sequence rather than fixed teaching labels. For example:
+QUESTION 1: What is the diagnosis?
+[REVEAL ON CLICK]
+ANSWER: [diagnosis]
+
+QUESTION 2: Which feature supports this diagnosis most?
+[REVEAL ON CLICK]
+ANSWER: [concise discriminating feature]
+
+QUESTION 3: How would you confirm the diagnosis, if confirmation is needed?
+[REVEAL ON CLICK]
+ANSWER: [concise diagnostic confirmation / investigation]
+
+QUESTION 4: What is the appropriate treatment or next management step?
+[REVEAL ON CLICK]
+ANSWER: [concise evidence-based treatment / primary-care action]
+
+QUESTION 5: Is referral, urgent escalation, or specific safety-netting required?
+[REVEAL ON CLICK]
+ANSWER: [concise referral / urgency / safety-netting answer when relevant]
+
+This is only an example of the direct-question style, NOT a required sequence and NOT a maximum number of questions. A straightforward spot may need only one or two questions; a clinically richer spot may need several. Include every important question needed to teach the diagnosis properly, especially diagnosis/recognition, confirmation when relevant, differential diagnosis, severity or urgency, treatment/management, referral, and safety-netting. Omit only questions that do not add meaningful educational value.
+
+Do NOT use repetitive visible headings such as DIAGNOSIS / FINDING, KEY CLUES, DIFFERENTIATE, CLINICAL ACTION, LOOK FOR, RECOGNIZE, or ACT as the standard structure of every spot. Put the teaching into the questions themselves and reveal concise answers directly beneath the relevant question.
+
+If an answer requires substantial explanation, a comparison table, management pathway, guideline recommendation, or deeper teaching, either continue the SAME Spot onto another slide with the same Spot title when the content remains part of that Spot's Q&A, or use a separate descriptive teaching slide only when it is genuinely standalone. Prioritize readable text and a large diagnostic visual over keeping a Spot artificially confined to one slide.
+
+Never reveal, visually emphasize, label, caption, or hint at the correct answer before residents commit.
+
+Across the sequence of questions, teach the clinically important pathway for that specific spot through direct questions. When relevant, this should include recognition/diagnosis, the key supporting feature, how the diagnosis is confirmed, important differentials, severity or urgency, treatment/management, referral criteria, and safety-netting. Do not force every domain into every spot, but do not omit an important domain simply because the spot already has several questions.
+
+PAIRED AND COMPARISON SPOTS
+
+Use paired spots when direct comparison improves learning, for example:
+- Condition A vs Condition B
+- Benign vs dangerous
+- Normal vs abnormal
+- Common diagnosis vs important mimic
+- Similar ECG patterns
+- Similar rashes or otoscopic findings
+
+When using paired spots, ask residents to identify the discriminating feature before revealing the answer. Do not manufacture paired comparisons if they do not add educational value.
+
+PROGRESSIVE DIFFICULTY
+
+Design for mixed R1-R3 residents using progressive difficulty:
+- Begin with classic, common, high-yield findings that R1 residents should recognize.
+- Progress to less obvious presentations and common mimics.
+- Include important red flags and dangerous diagnoses that should not be missed.
+- Add more challenging interpretation or differentiation suitable for R2/R3 when it is relevant to the required diagnoses.
+
+Do not make difficulty depend on obscure trivia. Difficulty should come from clinically meaningful visual reasoning, subtle findings, competing differentials, or management implications.
+
+REQUIRED VISUAL PLACEHOLDERS IN STAGE 1
+
+At this draft stage, do NOT invent, draw, or fabricate diagnostic images. When a spot requires a visual, state exactly what clinically appropriate material is required using a clear placeholder such as:
+[REQUIRED DERMATOLOGY IMAGE: classic herpes zoster eruption on a thoracic dermatome]
+[REQUIRED OTOSCOPY IMAGE: acute otitis media with bulging erythematous tympanic membrane]
+[REQUIRED FUNDUS IMAGE: proliferative diabetic retinopathy]
+[REQUIRED 12-LEAD ECG: atrial fibrillation with rapid ventricular response]
+[REQUIRED CXR: right lower lobe pneumonia]
+[REQUIRED CLINICAL IMAGE: de-identified localized finding...]
+[REQUIRED DATA PANEL: ...]
+
+The placeholder must describe the required diagnostic content precisely enough that the correct visual can later be sourced without changing the teaching point.
+
+Do not use AI-generated or synthetic clinical images to teach diagnosis. Do not use decorative patient photos. When authentic clinical photography is educationally necessary, it should be de-identified, clinically accurate, and sourced appropriately at the PowerPoint stage.
+
+TITLE SLIDE AND START OF SPOTS
+
+SLIDE 1 must be a simple title slide containing ONLY:
+- Lecture title
+- Presenter name
+
+Do not add a subtitle, target-diagnosis list, session description, audience level, agenda, institution details, or other educational content to Slide 1.
+
+After Slide 1, begin the diagnostic teaching sequence.
+- Do NOT create a Learning Objectives slide.
+- Do NOT create a “Target Diagnoses,” “Required Spots,” agenda, or diagnosis-list slide before the challenges.
+- Do NOT reveal the complete list of diagnoses to the audience before the spots.
+- The first appropriate diagnostic challenge may therefore begin on Slide 2.
+
+SESSION LENGTH AND SLIDE COUNT
+
+Design the session for a realistic teaching duration of 45-60 minutes.
+
+Do NOT target, prescribe, or aim for a specific number of slides or diagnostic spots. Build as many slides and teaching slides as educationally appropriate to cover every required diagnosis within a realistic 45-60 minute teaching session.
+
+Let the complexity of the topic, the number of meaningful visual patterns, the time needed for residents to inspect and discuss each spot, and the depth of explanation determine the final slide count.
+
+Do not inflate the deck with filler or repetitive spots merely to increase the slide count. Do not compress important visual reasoning, differentiation, or management teaching merely to keep the deck short.
+
+SLIDE PACING AND CONTENT GRANULARITY
+
+Whenever practical, use ONE MAJOR TEACHING TASK PER SLIDE. A slide may primarily:
+- Present one diagnostic spot
+- Ask residents to identify a diagnosis or key finding
+- Reveal and explain the answer
+- Compare two similar findings
+- Teach the discriminating clue between mimics
+- Explain a red flag or danger sign
+- Present a focused management implication
+- Present a concise guideline recommendation
+- Summarize recognition pearls
+
+A Spot does not automatically require multiple slides. If its visual and direct Q&A fit comfortably while remaining highly readable, keep them together. However, a clinically rich Spot SHOULD span multiple slides when necessary to preserve a large diagnostic visual and readable text. Split the content during Stage 1 rather than compressing it. Keep the SAME Spot number/title across continuation slides and continue the question sequence naturally. Use a separate descriptive teaching slide only when the content is truly standalone rather than continuation of the Spot.
+
+VISUAL-FIRST, RESIDENT-FRIENDLY CONTENT
+
+Spot slides should be visually dominant and text-light BEFORE the reveal. The clinical image, tracing, radiograph, or data should occupy the largest meaningful area of the future slide.
+
+Use only enough pre-reveal text to make the challenge fair. Do not overcrowd a spot with history or teaching text before residents have inspected it.
+
+After the reveal, visible content should still be sufficiently informative for a resident reviewing the deck later to understand:
+- What the diagnosis/finding is
+- Which features support it
+- What important mimic should be considered when relevant
+- What the practical primary-care action or implication is
+
+Plan the Stage 1 slide boundaries with lecture-room readability in mind. Main visible questions and answers should be able to render at 22 pt or larger in the eventual PowerPoint. If they cannot, continue the SAME Spot on another slide instead of shortening important teaching or planning to shrink the font.
+
+Avoid both extremes:
+- Do not create bare image-only slides with no post-reveal teaching value.
+- Do not create textbook-like slides that bury the visual under paragraphs.
+
+PRESENTER NOTES
+
+Keep Presenter Notes focused and practical. Do not create extensive scripts.
+
+Presenter Notes should briefly provide, when relevant:
+- Additional recognition reasoning not suitable for the visible slide
+- Why the key clue supports the diagnosis
+- Why an important mimic is less likely
+- A useful discussion prompt
+- Guideline nuance or management implication
+- Source details for the clinical visual or evidence
+
+Do NOT routinely include separate sections for Suggested Time, How to Present, Ask the Audience, Key Point to Emphasize, or Suggested Transition.
+
+SLIDE STRUCTURE CLARITY
+
+Output only actual numbered slides. Do not create separate SPOT headings, SECTION headings, or other standalone headings that could be mistaken for additional slides.
+
+Each actual slide must have only ONE primary title, using exactly this format:
+SLIDE [NUMBER] - [TITLE]
+
+One SLIDE heading must always equal one future PowerPoint slide.
+
+For EVERY slide use:
+
+SLIDE [NUMBER] - [TITLE]
+
+VISIBLE SLIDE CONTENT:
+[Actual content intended for the slide, including the exact diagnostic prompt, minimal clinical context, required visual placeholder, reveal content when on the same slide, and resident-friendly teaching points.]
+
+PRESENTER NOTES:
+[Brief recognition reasoning, key differential clues, clinical implication, discussion prompt, or source note when useful.]
+
+SOURCE / REFERENCE:
+[Relevant evidence source and, when known, the intended clinical visual source or source type.]
+
+FINAL SPOT CHALLENGE AND CLOSING
+
+Near the end, when appropriate, include a FINAL SPOT CHALLENGE using several rapid high-yield spots with minimal or no hints. The purpose is retrieval and recognition, not new obscure content.
+
+The FINAL SPOT CHALLENGE must reuse the user-selected TARGET DIAGNOSES / REQUIRED SPOTS, or clinically appropriate variations of those same approved diagnoses/findings. Do not introduce any new primary diagnosis or condition in the final challenge.
+
+Reveal the answers only after residents commit. Keep the challenge concise enough to fit the session.
+
+Finish with approximately 5 actionable TAKE-HOME RECOGNITION PEARLS focused on how to recognize, differentiate, and act on the most important findings from the lecture.
+
+Finish with REFERENCES containing only sources actually used.
+
+Before writing the final draft, silently verify that every user-selected target diagnosis is included as a primary spot at least once and none is silently substituted; no unrequested condition has become an additional primary spot; the FINAL SPOT CHALLENGE reuses only the selected diagnoses/findings or appropriate variations of them and introduces no new primary diagnosis; the full diagnosis list is not revealed before the challenges; the session is truly spot-diagnosis based; every spot has a meaningful visual or data stimulus; titles do not reveal answers; pre-reveal information is minimal but fair; residents commit before answers appear; explanations teach how to recognize and differentiate rather than merely naming the diagnosis; difficulty progresses appropriately for mixed R1-R3 residents; red flags and primary-care actions are emphasized when relevant; no synthetic diagnostic images are proposed; visual placeholders are precise; the lecture realistically supports 45-60 minutes; and the slide/spot count is determined by educational need rather than a preset target.
+
+FINAL INSTRUCTION:
+DO NOT create or design the PowerPoint yet.
+Produce ONLY the complete slide-by-slide CONTENT DRAFT for review and approval.
+Presentation design will be performed separately after approval.
+`;
+const FUTURE_CASE_DESIGN=`
+
+------------------------------------------------------------
+FUTURE STAGE 2 — POWERPOINT DESIGN INSTRUCTIONS
+DO NOT EXECUTE THIS SECTION YET.
+------------------------------------------------------------
+
+These instructions are intentionally included for later use in THIS SAME CHAT. First complete Stage 1 exactly as instructed above and stop after providing the slide-by-slide content draft.
+
+Only AFTER the user has reviewed the content and explicitly says it is approved and asks to create the PowerPoint presentation, apply the following Stage 2 rules directly to the FINAL APPROVED CONTENT from this conversation. Do not ask the user to return to the website, paste the content into another prompt, or provide another design prompt.
+
+STAGE 2 — PRESENTATION DESIGN ONLY
+The final approved slide content is the single source of truth. Convert it into the ACTUAL editable PowerPoint presentation (.pptx). Preserve the approved clinical meaning, wording, slide sequence, and educational intent, but actively redesign how information is visually communicated. Do not merely paste text into a generic template.
+
+NON-NEGOTIABLE CONTENT PRESERVATION
+- ONE approved slide = ONE PowerPoint slide. Preserve the exact approved slide count and sequence.
+- Never create extra slides merely to reveal an answer.
+- Preserve titles, clinical facts, cases, questions, answers, recommendations, thresholds, drug doses, objectives, and references.
+- Do not add, remove, reinterpret, update, verify, research, or replace clinical content.
+- If something appears questionable, keep it unchanged and flag it in a final DESIGN REVIEW NOTE.
+- Transfer approved PRESENTER NOTES into PowerPoint speaker notes whenever technically supported.
+
+NO DUPLICATED TEXT OR HEADINGS
+- Never repeat a slide title, case label, section label, patient description, question, answer, Clinical Pearl, or other text accidentally within the same slide.
+- Each slide has ONE primary title only.
+- A case identifier such as “Case 1 – First Visit” may appear ONCE as a small case label.
+- Drafting metadata such as “Approved Slide 3”, “VISIBLE SLIDE CONTENT”, “PRESENTER NOTES”, “SOURCE / REFERENCE”, [REVEAL ON CLICK], [APPEAR ON CLICK], or similar authoring labels must NEVER appear as audience-facing content.
+- Perform a slide-by-slide duplication check before delivery.
+
+READABILITY IS NON-NEGOTIABLE
+Never shrink text simply to make content fit. Target:
+- Primary title: 30–36 pt
+- Main body: 22–26 pt
+- Clinical question/key decision/major number: 24–30 pt when practical
+- Case details: 22–24 pt
+- Table text: preferably 18–22 pt; avoid below 18 pt unless genuinely necessary
+- Source/footer: 9–11 pt
+- Full reference slides may be smaller when necessary but must remain readable.
+If content does not fit, improve hierarchy, use columns/cards/tables, convert sequences to diagrams/flowcharts, or redistribute elements spatially. Never solve overcrowding by making body text tiny. Do not remove approved educational information merely to make a slide cleaner.
+
+PROGRESSIVE REVEAL WITHOUT DUPLICATE SLIDES
+For [REVEAL ON CLICK] or [APPEAR ON CLICK]:
+- Keep question and answer on the SAME PowerPoint slide.
+- Show question/case first; reveal answer/explanation/Clinical Pearl with an entrance animation on click when technically supported.
+- Do NOT duplicate the slide as an answer slide and do NOT increase slide count.
+- If reliable animations cannot be created, keep the answer on the SAME slide in a separated reveal area and add a speaker-note instruction: “Reveal this answer after audience discussion.” Never create a duplicate slide.
+- Never visually hint at the correct answer before discussion.
+
+VISUAL TRANSFORMATION, NOT TEXT TRANSFER
+Use the best visual form without changing meaning:
+- Clinical case → patient snapshot/card with grouped demographics, vitals, history, medications, findings.
+- MCQ → prominent question + clearly separated option cards/rows.
+- Short answer → dedicated reveal panel on same slide.
+- Comparison → professional table or side-by-side cards.
+- Sequential process → actual flowchart/process diagram.
+- Algorithm → editable PowerPoint shapes + connectors.
+- Threshold/target → prominent number/decision rule with supporting context.
+- Case progression → consistent case label/follow-up strip so the audience recognizes the same patient.
+- Clinical Pearl → restrained highlighted callout.
+- Guideline recommendation → recommendation callout with key threshold/decision emphasized.
+- Take-home messages → 4–6 clean takeaway blocks rather than dense bullets.
+
+DESIGN GOAL
+Modern professional academic medical presentation for a Family Medicine Residency Training Program at Security Forces Hospital; postgraduate, not corporate and not childish.
+
+VISUAL IDENTITY
+- Widescreen 16:9.
+- Clean white default background.
+- Restrained SFH-inspired teal, dark navy/charcoal, subtle gold accents.
+- Strong hierarchy, generous whitespace, consistent alignment/typography.
+- Avoid excessive decoration, gradients, shadows, cartoon icons, and clutter.
+- No photos or AI-generated images of patients/people.
+- Use editable PowerPoint text, tables, shapes, and diagrams whenever possible.
+
+LAYOUT SYSTEM
+Use a coherent family of layouts according to purpose: Title, Objectives, Case Presentation, Clinical Question, Answer/Reasoning, Focused Teaching, Comparison/Table, Guideline Recommendation, Algorithm/Flowchart, Case Progression, Clinical Pearl, Case Summary, Take-Home, References. Do not force every slide into one template.
+
+TITLE SLIDE
+Slide 1 contains ONLY the approved lecture title and presenter name. Do not add logo, subtitle, institution, date, agenda, or decorative text unless already approved.
+
+RESIDENT-FRIENDLY DESIGN
+- Keep enough visible information for a resident with moderate presentation experience to teach from the slide.
+- Do not make informative slides ultra-minimal, textbook-like, or overcrowded.
+- Use complete but concise approved wording with visual grouping.
+- Keep one dominant educational task per slide.
+- Emphasize important values, thresholds, targets, drug choices, and Clinical Pearls.
+
+CASE CONTINUITY
+- Make case slides visually distinct from teaching slides.
+- For every clinical case slide, use ONLY the case number as the primary slide title, for example: “Case 1”, “Case 2”, “Case 3”.
+- Do NOT use descriptive case slide titles, even if they appear neutral or do not reveal the answer.
+- Do NOT add phrases such as “First Visit,” “Follow-up,” “Next Decision,” “Initial Treatment,” “Lower-Risk Scenario,” “New Information,” “Management Decision,” or similar wording to the primary slide title.
+- If the same case continues across multiple slides, keep the same simple title, for example “Case 3”, on all corresponding case slides.
+- Any necessary stage or progression information may appear within the slide content when educationally useful, but not in the primary title.
+- This rule applies only to clinical case slides. Teaching, guideline, table, algorithm, summary, and other non-case slides should retain their approved descriptive titles.
+- Maintain visual continuity as the same patient progresses.
+- Do not reveal future information early.
+
+TABLES
+Convert approved tables into real editable PowerPoint tables when practical. Preserve all rows, columns, values, doses, and wording. Improve spacing/alignment/hierarchy. Keep text preferably 18–22 pt. Existing cautions may be separated into callouts.
+
+ALGORITHMS AND FLOWCHARTS
+Convert approved pathways/sequences/[SUGGESTED ALGORITHM]/[SUGGESTED FLOWCHART] into actual editable shapes and connectors. Preserve exact clinical logic and do not invent branches.
+
+SOURCES / REFERENCES
+Keep ordinary-slide sources discreet in a 9–11 pt footer so they do not compete with teaching content. Preserve supplied full citations on References slides and/or speaker notes. Do not fabricate or expand citations.
+
+PRESENTER NOTES
+Put approved PRESENTER NOTES into speaker notes when supported. Do not expose them as visible slide text unless already approved. Do not generate additional scripts.
+
+TECHNICAL QUALITY CONTROL
+Inspect EVERY slide for accidental duplicated titles/case labels/text; visible drafting metadata; font sizes below targets; overflow/clipping/overlap; malformed symbols such as ≥, ≤, arrows, superscripts, subscripts, ±, m², K⁺ and units; broken tables/connectors; premature answers; inconsistent case labels; overly prominent sources; unnecessary decoration. Correct design/rendering defects without changing clinical meaning.
+
+FINAL QUALITY CHECK
+Confirm:
+1. PowerPoint slide count exactly matches approved slide count.
+2. Every approved slide appears once and only once.
+3. No title/case label is duplicated.
+4. No drafting/production metadata is visible.
+5. Main body text is generally 22–26 pt and was not shrunk just to fit.
+6. Reveal content stays on the same slide and creates no duplicate slides.
+7. Answers are not prematurely visible.
+8. Tables/algorithms/processes are visually transformed where appropriate rather than pasted as plain text.
+9. Clinical content was not altered or supplemented.
+10. Notes/references are preserved appropriately.
+11. No patient/person photos or AI-generated people are used.
+12. The deck is appropriate for postgraduate Family Medicine teaching.
+
+WHEN THE USER APPROVES THE CONTENT AND REQUESTS THE PRESENTATION:
+Create and provide the actual editable PowerPoint (.pptx) directly from the final approved content in this conversation. Preserve the approved slide count exactly and prioritize lecture-room readability, visual teaching, and zero accidental duplication.
+`;
+
+const FUTURE_INTERACTIVE_DESIGN=`
+
+------------------------------------------------------------
+FUTURE STAGE 2 — POWERPOINT DESIGN INSTRUCTIONS
+DO NOT EXECUTE THIS SECTION YET.
+------------------------------------------------------------
+
+These instructions are intentionally included for later use in THIS SAME CHAT. First complete Stage 1 exactly as instructed above and stop after providing the slide-by-slide content draft.
+
+Only AFTER the user has reviewed the content and explicitly says it is approved and asks to create the PowerPoint presentation, apply the following Stage 2 rules directly to the FINAL APPROVED CONTENT from this conversation. Do not ask the user to return to the website, paste the content into another prompt, or provide another design prompt.
+
+STAGE 2 — PRESENTATION DESIGN ONLY
+The final approved slide content is the single source of truth. Convert it into the ACTUAL editable PowerPoint presentation (.pptx). Preserve the approved clinical meaning, wording, slide sequence, and educational intent, but actively redesign how information is visually communicated. Do not merely paste text into a generic template.
+
+NON-NEGOTIABLE CONTENT PRESERVATION
+- ONE approved slide = ONE PowerPoint slide. Preserve the exact approved slide count and sequence.
+- Never create extra slides merely to reveal an answer.
+- Preserve titles, clinical facts, short scenarios, questions, answers, recommendations, thresholds, drug doses, objectives, interactions, and references.
+- Do not add, remove, reinterpret, update, verify, research, or replace clinical content.
+- If something appears questionable, keep it unchanged and flag it in a final DESIGN REVIEW NOTE.
+- Transfer approved PRESENTER NOTES into PowerPoint speaker notes whenever technically supported.
+
+NO DUPLICATED TEXT OR HEADINGS
+- Never repeat a slide title, activity label, scenario description, question, answer, Clinical Pearl, or other text accidentally within the same slide.
+- Each slide has ONE primary title only.
+- Preserve the approved primary title. Do not impose case numbering or case-stage titles on short clinical scenarios unless they were explicitly approved in Stage 1.
+- Drafting metadata such as “Approved Slide 3”, “VISIBLE SLIDE CONTENT”, “PRESENTER NOTES”, “SOURCE / REFERENCE”, [REVEAL ON CLICK], [APPEAR ON CLICK], or similar authoring labels must NEVER appear as audience-facing content.
+- Perform a slide-by-slide duplication check before delivery.
+
+READABILITY IS NON-NEGOTIABLE
+Never shrink text simply to make content fit. Target:
+- Primary title: 30–36 pt
+- Main body: 22–26 pt
+- Clinical question/key decision/major number: 24–30 pt when practical
+- Short clinical scenario details: 22–24 pt
+- Table text: preferably 18–22 pt; avoid below 18 pt unless genuinely necessary
+- Source/footer: 9–11 pt
+- Full reference slides may be smaller when necessary but must remain readable.
+If content does not fit, improve hierarchy, use columns/cards/tables, convert sequences to diagrams/flowcharts, or redistribute elements spatially. Never solve overcrowding by making body text tiny. Do not remove approved educational information merely to make a slide cleaner.
+
+PROGRESSIVE REVEAL WITHOUT DUPLICATE SLIDES
+For [REVEAL ON CLICK] or [APPEAR ON CLICK]:
+- Keep question and answer on the SAME PowerPoint slide when Stage 1 approved them on the same slide.
+- Show the question, challenge, or short scenario first; reveal the answer/explanation/Clinical Pearl with an entrance animation on click when technically supported.
+- Do NOT duplicate the slide as an answer slide and do NOT increase slide count.
+- If reliable animations cannot be created, keep the answer on the SAME slide in a separated reveal area and add a speaker-note instruction: “Reveal this answer after audience discussion.” Never create a duplicate slide.
+- Never visually hint at the correct answer before discussion.
+
+INTERACTIVE ACTIVITY DESIGN
+- Make interactive moments visually distinct from ordinary teaching slides while keeping the overall deck professional and consistent.
+- Preserve the approved interaction type rather than converting every activity into an MCQ.
+- MCQ / Single Best Answer → prominent question with clearly separated option cards or rows.
+- True or False / Myth or Fact → clear statement first, with the verdict and rationale revealed only after discussion.
+- What would you do next? / short clinical scenario → concise scenario card plus a prominent decision prompt.
+- Choose all that apply → clearly separated selectable options; reveal the correct selections only after discussion.
+- Rank the options → show the items before revealing the approved order and rationale.
+- Spot the error → display the approved prescription, plan, or statement clearly enough for residents to inspect before the correction is revealed.
+- Interpret this → give the clinical data, laboratory results, ECG, imaging, BP readings, risk result, or other approved material visual priority before revealing the interpretation.
+- Open discussion question → emphasize the prompt without manufacturing a single “correct answer” unless Stage 1 contains one.
+- Before vs After → clearly separate the initial decision from the later guideline/evidence-based reconsideration.
+- Do not add decorative poll controls, fake voting percentages, or invented audience results.
+
+VISUAL TRANSFORMATION, NOT TEXT TRANSFER
+Use the best visual form without changing meaning:
+- Short clinical scenario → compact clinical snapshot/card with only the approved patient details.
+- MCQ → prominent question + clearly separated option cards/rows.
+- Short answer → dedicated reveal panel on the same slide.
+- Interpretation exercise → data-first layout with the approved ECG/labs/readings/image placeholder or result given visual priority.
+- Spot-the-error exercise → clearly display the item being critiqued, then reveal the approved correction/rationale.
+- Comparison → professional table or side-by-side cards.
+- Sequential process → actual flowchart/process diagram.
+- Algorithm → editable PowerPoint shapes + connectors.
+- Threshold/target → prominent number/decision rule with supporting context.
+- Clinical Pearl → restrained highlighted callout.
+- Guideline recommendation → recommendation callout with key threshold/decision emphasized.
+- Knowledge Check → compact, readable rapid-question format without overcrowding.
+- Take-home messages → 4–6 clean takeaway blocks rather than dense bullets.
+
+DESIGN GOAL
+Modern professional academic medical presentation for a Family Medicine Residency Training Program at Security Forces Hospital; postgraduate, not corporate and not childish.
+
+VISUAL IDENTITY
+- Widescreen 16:9.
+- Clean white default background.
+- Restrained SFH-inspired teal, dark navy/charcoal, subtle gold accents.
+- Strong hierarchy, generous whitespace, consistent alignment/typography.
+- Avoid excessive decoration, gradients, shadows, cartoon icons, and clutter.
+- No photos or AI-generated images of patients/people.
+- Use editable PowerPoint text, tables, shapes, and diagrams whenever possible.
+
+LAYOUT SYSTEM
+Use a coherent family of layouts according to purpose: Title, Objectives, Focused Teaching, Interactive Question, MCQ / Single Best Answer, Short Clinical Scenario, Answer / Reasoning, Interpretation Exercise, Spot the Error, Comparison / Table, Guideline Recommendation, Algorithm / Flowchart, Clinical Pearl, Knowledge Check, Take-Home, References. Do not force every slide into one template.
+
+TITLE SLIDE
+Slide 1 contains ONLY the approved lecture title and presenter name. Do not add logo, subtitle, institution, date, agenda, or decorative text unless already approved.
+
+RESIDENT-FRIENDLY DESIGN
+- Keep enough visible information for a resident with moderate presentation experience to teach from the slide.
+- Do not make informative slides ultra-minimal, textbook-like, or overcrowded.
+- Use complete but concise approved wording with visual grouping.
+- Keep one dominant educational task per slide.
+- Emphasize important values, thresholds, targets, drug choices, interaction prompts, and Clinical Pearls.
+
+INTERACTIVE LECTURE CONTINUITY
+- The TOPIC remains the visual and educational backbone of the deck; do not redesign it as a sequence of numbered cases.
+- Short clinical scenarios are application tools, not the organizing structure of the presentation.
+- Preserve descriptive teaching titles and approved interaction titles from Stage 1.
+- Do not add “Case 1”, “Case 2”, “Follow-up”, “Next Decision”, “Case Progression”, or similar case-continuity labels unless they already exist in the final approved content.
+- Keep a consistent visual language for interaction slides so residents immediately recognize when audience participation is expected.
+- After an interaction, make the approved rationale/explanation visually clear and reconnect it to the relevant clinical principle or guideline recommendation.
+- Do not reveal future answers, corrections, rankings, or interpretations early.
+
+TABLES
+Convert approved tables into real editable PowerPoint tables when practical. Preserve all rows, columns, values, doses, and wording. Improve spacing/alignment/hierarchy. Keep text preferably 18–22 pt. Existing cautions may be separated into callouts.
+
+ALGORITHMS AND FLOWCHARTS
+Convert approved pathways/sequences/[SUGGESTED ALGORITHM]/[SUGGESTED FLOWCHART] into actual editable shapes and connectors. Preserve exact clinical logic and do not invent branches.
+
+SOURCES / REFERENCES
+Keep ordinary-slide sources discreet in a 9–11 pt footer so they do not compete with teaching content. Preserve supplied full citations on References slides and/or speaker notes. Do not fabricate or expand citations.
+
+PRESENTER NOTES
+Put approved PRESENTER NOTES into speaker notes when supported. Do not expose them as visible slide text unless already approved. Do not generate additional scripts.
+
+TECHNICAL QUALITY CONTROL
+Inspect EVERY slide for accidental duplicated titles/activity labels/text; visible drafting metadata; font sizes below targets; overflow/clipping/overlap; malformed symbols such as ≥, ≤, arrows, superscripts, subscripts, ±, m², K⁺ and units; broken tables/connectors; premature answers; interaction layouts that reveal the answer too early; overly prominent sources; unnecessary decoration. Correct design/rendering defects without changing clinical meaning.
+
+FINAL QUALITY CHECK
+Confirm:
+1. PowerPoint slide count exactly matches approved slide count.
+2. Every approved slide appears once and only once.
+3. No title, activity label, question, or answer is accidentally duplicated.
+4. No drafting/production metadata is visible.
+5. Main body text is generally 22–26 pt and was not shrunk just to fit.
+6. Reveal content stays on the same slide when approved that way and creates no duplicate slides.
+7. Answers, corrections, rankings, interpretations, and guideline conclusions are not prematurely visible.
+8. Interactive formats remain varied and are not converted into one repetitive question style.
+9. Tables/algorithms/processes are visually transformed where appropriate rather than pasted as plain text.
+10. Clinical content was not altered or supplemented.
+11. Notes/references are preserved appropriately.
+12. No patient/person photos or AI-generated people are used.
+13. The deck is appropriate for postgraduate Family Medicine teaching and visibly functions as an interactive lecture rather than a case-based lecture.
+
+WHEN THE USER APPROVES THE CONTENT AND REQUESTS THE PRESENTATION:
+Create and provide the actual editable PowerPoint (.pptx) directly from the final approved content in this conversation. Preserve the approved slide count exactly and prioritize lecture-room readability, interaction clarity, visual teaching, and zero accidental duplication.
+`;
+const FUTURE_SPOT_DESIGN=`
+
+------------------------------------------------------------
+FUTURE STAGE 2 — POWERPOINT DESIGN INSTRUCTIONS
+DO NOT EXECUTE THIS SECTION YET.
+------------------------------------------------------------
+
+These instructions are intentionally included for later use in THIS SAME CHAT. First complete Stage 1 exactly as instructed above and stop after providing the slide-by-slide content draft.
+
+Only AFTER the user has reviewed the content and explicitly says it is approved and asks to create the PowerPoint presentation, apply the following Stage 2 rules directly to the FINAL APPROVED CONTENT from this conversation. Do not ask the user to return to the website, paste the content into another prompt, or provide another design prompt.
+
+STAGE 2 — PRESENTATION DESIGN ONLY
+
+The final approved slide content is the single source of truth. Convert it into the ACTUAL editable PowerPoint presentation (.pptx). Preserve the approved clinical meaning, wording, slide sequence, spot sequence, diagnostic logic, and educational intent, but actively redesign how the information is visually communicated. Do not merely paste text into a generic template.
+
+NON-NEGOTIABLE CONTENT PRESERVATION
+- ONE approved slide = ONE PowerPoint slide. Preserve the exact approved slide count and sequence.
+- Never create extra slides merely to reveal an answer.
+- Preserve approved titles, diagnostic prompts, visual requirements, clinical context, diagnoses, findings, clues, differentials, management implications, target-diagnosis coverage, and references.
+- Do not add, remove, reinterpret, update, verify, research, or replace approved clinical content except for sourcing the exact visual material required by an approved visual placeholder.
+- If something appears questionable, keep the approved text unchanged and flag it in a final DESIGN REVIEW NOTE.
+- Transfer approved PRESENTER NOTES into PowerPoint speaker notes whenever technically supported.
+
+CLINICAL VISUAL SOURCING — CRITICAL
+When an approved slide contains a [REQUIRED ... IMAGE], [REQUIRED ECG], [REQUIRED CXR], [REQUIRED FUNDUS IMAGE], [REQUIRED OTOSCOPY IMAGE], [REQUIRED DATA PANEL], or similar placeholder:
+- Source a clinically accurate visual that matches the approved placeholder as closely as possible when reliable tools and sources are available.
+- Prefer authoritative, educational, public-domain, Creative Commons, open-access, or otherwise appropriately usable clinical sources.
+- Preserve source attribution in a discreet footer or speaker notes as appropriate.
+- Do not invent, redraw, retouch, stylize, or modify diagnostic features in a way that could change interpretation.
+- Do not use AI-generated or synthetic clinical images to teach diagnosis.
+- Do not use a visually similar image that represents a different diagnosis merely because it looks attractive.
+- If a reliable matching visual cannot be obtained, keep a professional clearly labeled visual placeholder on the slide rather than fabricating a diagnostic image.
+- For ECGs, radiographs, fundus, otoscopy, dermatology, and other diagnostic visuals, clinical fidelity is more important than decoration.
+- Avoid identifiable patient faces or unnecessary identifying features. Use de-identified clinical imagery whenever possible.
+
+NO DUPLICATED TEXT OR HEADINGS
+- Never repeat a slide title, spot label, diagnostic prompt, diagnosis, answer, clue list, or other text accidentally within the same slide.
+- Each slide has ONE primary title only.
+- Diagnostic challenge slides must preserve the approved simple Spot title, such as “Spot 1”, “Spot 2”, etc.
+- Do not replace a neutral Spot title with the diagnosis or any descriptive title that hints at the answer.
+- Drafting metadata such as “Approved Slide 3”, “VISIBLE SLIDE CONTENT”, “PRESENTER NOTES”, “SOURCE / REFERENCE”, [REVEAL ON CLICK], [REQUIRED IMAGE], [APPEAR ON CLICK], or similar authoring labels must NEVER appear as audience-facing content, except that an unresolved clinical visual placeholder may remain professionally labeled if a reliable image cannot be sourced.
+- Perform a slide-by-slide duplication check before delivery.
+
+READABILITY AND VISUAL PRIORITY
+Never shrink text simply to make content fit. For Spot Diagnosis decks, lecture-room readability takes priority over keeping all content on one slide. Target:
+- Primary title: 30–36 pt
+- Diagnostic prompt / question: 26–30 pt
+- Revealed answer / main teaching text: 22–26 pt
+- Clinical context: 22–24 pt
+- Table/comparison text: preferably 18–22 pt
+- Source/footer: 9–11 pt
+- Full reference slides may be smaller when necessary but must remain readable.
+Except for tables, source/footer text, and full reference slides, do not use main visible text below 22 pt. If approved content will not fit at these sizes while preserving an appropriately large diagnostic visual, the content should already have been split across continuation slides in Stage 1; never solve the problem by shrinking the text.
+
+The diagnostic visual must usually be the largest and most visually dominant element on a Spot slide. Do not sacrifice image size merely to fit excessive text. Use concise grouping, reveal panels, callouts, and separate teaching slides when the approved content already provides them.
+
+TEXT CONTAINER SIZING AND OVERFLOW — NON-NEGOTIABLE
+- No audience-facing text may extend outside its text box, card, panel, table cell, or slide boundary. No clipping, overlap, cut-off text, or text covering another element is acceptable.
+- Do not use fixed-height text boxes for variable-length question-and-answer content unless the box has first been sized for the ACTUAL rendered text at the required font size. Text containers must be sized according to the rendered text, not according to a generic template.
+- Do not use PowerPoint AutoFit, Shrink Text on Overflow, or any equivalent behavior that silently reduces main visible text below the minimum readability targets.
+- Before finalizing each slide, fit content in this order: (1) enlarge or reposition the text container, (2) reduce unnecessary internal padding and paragraph spacing, (3) redistribute neighboring elements while preserving a large diagnostic visual, (4) switch to a more suitable layout such as a vertical-flow Q&A layout, stacked panels, or wider text area. Never solve overflow by shrinking main visible text below 22 pt.
+- For slides containing several Q&A pairs, prefer a flexible VERTICAL FLOW layout in which each question-and-answer block receives the height it actually needs. Do not force multiple variable-length answers into equal fixed-height cards.
+- Keep reasonable internal margins so text does not visually touch box edges even when it technically fits.
+- If the approved Stage 1 slide is unusually dense, redesign the spatial layout aggressively while preserving all approved content and the approved slide count. Do not merge approved continuation slides.
+
+PROGRESSIVE REVEAL WITHOUT DUPLICATE SLIDES
+For [REVEAL ON CLICK] or [APPEAR ON CLICK]:
+- Keep the diagnostic stimulus and its approved reveal content on the SAME PowerPoint slide when Stage 1 approved them on the same slide.
+- Show the visual stimulus and diagnostic question first.
+- Reveal the approved answer to each direct question with an entrance animation on click when technically supported. Preserve the Stage 1 question-and-answer sequence rather than reorganizing it into fixed diagnostic categories.
+- Do NOT duplicate the slide as an answer slide and do NOT increase slide count.
+- If reliable animations cannot be created, keep the answer in a clearly separated reveal area on the SAME slide and add a speaker-note instruction: “Reveal this answer after audience commitment/discussion.” Never create a duplicate slide.
+- Never visually hint at the answer before the reveal through color, labeling, captions, arrows, highlighted lesions, annotations, image filenames, or source text.
+
+SPOT SLIDE DESIGN
+- Make diagnostic Spot slides visually distinct from ordinary teaching slides while keeping the whole deck professional and consistent.
+- Use the approved simple title: Spot 1, Spot 2, Spot 3, etc.
+- Give the diagnostic image/tracing/data the dominant area of the slide.
+- Keep pre-reveal clinical context concise and secondary to the visual.
+- Make the diagnostic prompt prominent but not larger than the visual itself.
+- After each reveal, show the concise approved answer directly beneath or beside its corresponding question. Preserve the direct Q&A flow rather than converting the slide into labeled sections.
+- When Stage 1 approved a Spot across multiple slides, keep the SAME Spot number/title on every continuation slide and preserve the approved question sequence. Do not merge continuation slides back together merely to reduce slide count.
+- Do not place labels, arrows, circles, or annotations on the pre-reveal visual if they expose the answer.
+- If annotation is useful for teaching, reveal it only after the answer when technically supported.
+
+VISUAL TRANSFORMATION BY SPOT TYPE
+Use the best visual layout without changing approved meaning:
+- Dermatology / localized clinical image → large image + minimal context + reveal panel; after reveal, optional small clue callouts if approved.
+- Otoscopy / fundus → large centered image with a clean border and no pre-reveal diagnostic caption.
+- ECG / rhythm strip → maximize tracing width; keep calibration/lead labels visible when present; do not crop away diagnostic information.
+- CXR / imaging → preserve orientation and important anatomy; use a large viewing area; avoid decorative cropping.
+- Data / laboratory pattern → clean compact data panel that visually prioritizes the abnormal pattern without highlighting the answer prematurely.
+- Paired comparison → balanced side-by-side visuals with neutral labels such as A and B before reveal.
+- Normal vs abnormal → matched visual sizes and orientation when possible.
+- Final Spot Challenge → rapid-recognition layout with sufficient visual size; do not miniaturize diagnostic images excessively.
+
+DIRECT QUESTION DESIGN
+When approved content includes follow-up questions about recognition features, a discriminating clue, a mimic/differential, urgency, or clinical action:
+- Preserve them as direct questions with their own concise revealed answers.
+- Do not reorganize them into repetitive visible sections titled Diagnosis, Key Clues, Differentiate, or Act.
+- Keep the explanation concise enough that the visual remains central.
+- Use a small professional comparison table or side-by-side clue cards only when the approved content itself compares findings.
+- Use a restrained Clinical Pearl or Red Flag callout only when approved.
+- Do not add unapproved facts merely to fill space.
+
+DESIGN GOAL
+Modern professional academic medical presentation for a Family Medicine Residency Training Program at Security Forces Hospital; postgraduate, image-led, clinically rigorous, not corporate and not childish.
+
+VISUAL IDENTITY
+- Widescreen 16:9.
+- Clean white default background.
+- Restrained SFH-inspired teal, dark navy/charcoal, subtle gold accents.
+- Strong hierarchy, generous whitespace, consistent alignment/typography.
+- Avoid excessive decoration, gradients, shadows, cartoon icons, and clutter.
+- Diagnostic images and tracings are the visual focus; decoration must never compete with them.
+- Use editable PowerPoint text, tables, shapes, and diagrams whenever possible.
+
+LAYOUT SYSTEM
+Use a coherent family of layouts according to purpose: Title, Spot Challenge, Spot Reveal, Paired Spot Comparison, Focused Recognition Teaching, Differential Comparison, Red Flag, Management Implication, Algorithm / Flowchart, Final Spot Challenge, Take-Home Recognition Pearls, References. Do not force every slide into one template.
+
+TITLE SLIDE
+Slide 1 contains ONLY the approved lecture title and presenter name. Do not add logo, subtitle, institution, date, agenda, or decorative text unless already approved.
+
+SPOT DIAGNOSIS CONTINUITY
+- The spots are the educational backbone of the deck.
+- Preserve the approved Spot numbering and sequence exactly.
+- Do not convert the session into a case-based lecture or a generic interactive quiz deck.
+- Do not add “Case 1”, “Follow-up”, “Next Decision”, or other case-continuity labels unless already approved.
+- Do not use disease names in Spot slide titles.
+- Keep a consistent visual language so residents immediately recognize a diagnostic challenge slide.
+- Preserve the direct question sequence after each reveal; when approved, use follow-up questions to address recognition, differentiation, urgency, or primary-care action.
+- Do not reveal future diagnoses, visual clues, annotations, or answers early.
+
+TABLES, ALGORITHMS, AND COMPARISONS
+Convert approved tables into real editable PowerPoint tables when practical. Preserve all rows, columns, values, doses, and wording. Convert approved pathways/[SUGGESTED ALGORITHM]/[SUGGESTED FLOWCHART] into editable shapes and connectors. Preserve exact clinical logic and do not invent branches.
+
+SOURCES / REFERENCES
+Keep ordinary-slide evidence and image sources discreet in a 9–11 pt footer or speaker notes so they do not compete with the visual challenge. Preserve supplied full citations on References slides and/or speaker notes. Do not fabricate or expand citations.
+
+PRESENTER NOTES
+Put approved PRESENTER NOTES into speaker notes when supported. Add only necessary image/source attribution or a reveal instruction when technically required. Do not generate new presentation scripts.
+
+TECHNICAL QUALITY CONTROL
+Inspect EVERY slide for accidental duplicated titles/spot labels/text; visible drafting metadata; diagnostic images that do not match the approved spot; image distortion; low-resolution visuals when a better legitimate source is available; cropped diagnostic features; answer-revealing captions or filenames; font sizes below targets; overflow/clipping/overlap; broken symbols or units; premature answers; inconsistent Spot numbering; overly prominent sources; unnecessary decoration. Correct design/rendering defects without changing approved clinical meaning.
+- After generating the PowerPoint, RENDER EVERY SLIDE to an image or PDF page and visually inspect the rendered result slide by slide. Do not rely only on object coordinates or programmatic checks.
+- Specifically verify that every question, answer, bullet, table cell, footer, and reference remains fully visible inside its intended container and within the slide boundary.
+- If any text overflows, clips, overlaps, touches an edge unacceptably, or is cut off at the bottom, repair the layout and render that slide again. Repeat until the rendered slide is clean.
+- The preferred repair sequence is: enlarge/reposition the container -> reduce unnecessary padding/spacing -> rebalance the layout -> use a more suitable vertical/stacked layout. Do NOT reduce main visible text below 22 pt to solve the defect.
+
+FINAL QUALITY CHECK
+Confirm:
+1. PowerPoint slide count exactly matches approved slide count.
+2. Every approved slide appears once and only once.
+3. Spot numbering and order are preserved exactly.
+4. No Spot title reveals or hints at the diagnosis.
+5. No drafting/production metadata is visible.
+6. Diagnostic visuals are large, clinically appropriate, and not distorted.
+7. No synthetic/AI-generated diagnostic images are used.
+8. Any unresolved visual placeholder is clearly labeled rather than replaced with a fabricated image.
+9. Answers, annotations, clue highlights, diagnoses, and management implications are not prematurely visible.
+10. Reveal content remains on the same slide when approved that way and creates no duplicate slides.
+11. Main visible question/answer/teaching text is generally at least 22 pt (except tables, footers, and full reference slides) and was not shrunk merely to fit; clinically rich Spots remain split across approved continuation slides when needed.
+12. Paired/comparison spots preserve equal visual emphasis before the reveal.
+13. Clinical content was not altered or supplemented beyond sourcing the approved visual requirement.
+14. Notes/references/image attribution are preserved appropriately.
+15. The deck is appropriate for postgraduate Family Medicine teaching and visibly functions as a Spot Diagnosis session.
+16. Spot slides use a direct question-and-answer style and are not reformatted into repetitive headings such as DIAGNOSIS / FINDING, KEY CLUES, DIFFERENTIATE, or CLINICAL ACTION.
+17. The number of direct questions is determined by educational need rather than an arbitrary cap; clinically important questions about confirmation, treatment, urgency, referral, or safety-netting are not omitted merely to keep a Spot short.
+18. A clinically rich Spot is split across multiple Stage 1 slides when necessary for readability; all continuation slides preserve the SAME Spot number/title and no important content is compressed into small text.
+19. No visible text extends outside its intended text box, card, panel, table cell, or slide boundary; there is no clipping, overlap, or cut-off text.
+20. Variable-length Q&A content is not forced into equal fixed-height boxes; containers are sized to the actual rendered text and flexible vertical-flow layouts are used when appropriate.
+21. Every slide has been rendered and visually inspected after generation, and any overflow or clipping defect has been corrected and re-rendered before delivery.
+
+WHEN THE USER APPROVES THE CONTENT AND REQUESTS THE PRESENTATION:
+Create and provide the actual editable PowerPoint (.pptx) directly from the final approved content in this conversation. Preserve the approved slide count exactly and prioritize diagnostic visual fidelity, lecture-room readability, progressive reveal, and zero accidental duplication.
+`;
+ let kind='case';
+document.querySelectorAll('.type').forEach(el=>el.onclick=()=>{document.querySelectorAll('.type').forEach(x=>x.classList.remove('active'));el.classList.add('active');kind=el.dataset.kind;const objLabel=document.getElementById('objectivesLabel'),obj=document.getElementById('objectives'),objHint=document.getElementById('objectivesHint');if(kind==='spot'){objLabel.textContent='Target Diagnoses / Required Spots';obj.placeholder='Enter the diagnoses or conditions to be included, one per line...\ne.g., Tinea corporis\nPsoriasis\nScabies\nMelanoma';objHint.textContent='List the diagnoses or conditions that must appear as Spot Diagnosis challenges.';objHint.style.display='block';}else{objLabel.textContent='Learning Objectives';obj.placeholder='Paste the approved learning objectives here...';objHint.textContent='';objHint.style.display='none';}document.getElementById('notice').style.display='none';document.getElementById('form').style.opacity='1';document.getElementById('generate').disabled=false;document.getElementById('output').style.display='none';});
+document.getElementById('generate').onclick=()=>{let t=document.getElementById('topic').value.trim(),pname=document.getElementById('presenter').value.trim(),o=document.getElementById('objectives').value.trim(),sources=document.getElementById('sources').value.trim()||'None specified',priority=document.getElementById('sourcePriority').value;if(!t||!pname||!o){alert(kind==='spot'?'Please enter the lecture topic, presenter name, and target diagnoses / required spots.':'Please enter the lecture topic, presenter name, and predefined learning objectives.');return;}let selectedMaster=kind==='interactive'?INTERACTIVE_MASTER:(kind==='spot'?SPOT_MASTER:CASE_MASTER);let p=selectedMaster.replaceAll('{{TOPIC}}',t).replaceAll('{{PRESENTER}}',pname).replaceAll('{{SOURCES}}',sources).replaceAll('{{SOURCE_PRIORITY}}',priority).replaceAll('{{OBJECTIVES}}',o).replaceAll('{{TARGET_DIAGNOSES}}',o);p+=(kind==='interactive'?FUTURE_INTERACTIVE_DESIGN:(kind==='spot'?FUTURE_SPOT_DESIGN:FUTURE_CASE_DESIGN));document.getElementById('prompt').textContent=p;document.getElementById('output').style.display='block';document.getElementById('output').scrollIntoView({behavior:'smooth'});};
+document.getElementById('copy').onclick=async()=>{await navigator.clipboard.writeText(document.getElementById('prompt').textContent);let b=document.getElementById('copy');b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy Prompt',1500);};
+</script></body></html>
